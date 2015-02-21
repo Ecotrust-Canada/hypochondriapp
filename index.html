@@ -19,7 +19,7 @@
     right: 0;
     z-index: 200;
   }
-  #map, #report { position:fixed; top:0; bottom:20%; width:100%;}
+  #map, #report { position:fixed; top:0; width:100%;}
   #report { bottom: 10%; z-index: 0; background-color: white; padding: 20px 40px; font-size: 20px;}
   #map { bottom: 20%; z-index: 100;}
   #menu, .submenu {
@@ -30,10 +30,13 @@
     height: 10%;
     text-align: center;
   }
-  #menu { bottom: 10%;}
-  .submenu { bottom:20%; }
+  #menu { bottom: 0}
+  .submenu { bottom:10%; }
   .item {padding: 10px; display: inline-block; font-size: 28px; background-color: white;}
 
+  .map-legend li {
+    list-style: none;
+  }
   .map-legend .swatch {
     width:20px;
     height:20px;
