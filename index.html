@@ -11,11 +11,28 @@
 
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
 <style>
-  body { margin:0; padding:0; }
-  #map { position:fixed; top:0; bottom:20%; width:100%; }
-  #menu { position:fixed; bottom:0; left:0; right:0; height:10%; background-color:red; }
-  .submenu { position:fixed; bottom:10%; left:0; right:0; height:10%; background-color:blue; }
-  .item {padding: 10px; float: left; font-size: 28px;}
+  body { margin:0; padding:0; font-family:verdana;}
+  h1,h2,h3,h4,h5,h6 {font-family: courier}
+  #toggle {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 200;
+  }
+  #map, #report { position:fixed; top:0; bottom:20%; width:100%;}
+  #report { bottom: 10%; z-index: 0; background-color: white; padding: 20px 40px; font-size: 20px;}
+  #map { bottom: 20%; z-index: 100;}
+  #menu, .submenu {
+    background-color: transparent;
+    position: fixed;
+    right: 0;
+    left: 0;
+    height: 10%;
+    text-align: center;
+  }
+  #menu { bottom: 10%;}
+  .submenu { bottom:20%; }
+  .item {padding: 10px; display: inline-block; font-size: 28px; background-color: white;}
 
   .map-legend .swatch {
     width:20px;
@@ -29,11 +46,21 @@
   .leaflet-popup-content-wrapper {
     pointer-events: none;
   }
+
 </style>
 
 </head>
 <body>
-<div id='map'>
+<div id='map' class='primary'>
+</div>
+
+<div id='report' class='primary'>
+  <p>Pick a region first.</p>
+</div>
+
+<div id='toggle'>
+  <div class='item' data-show='map'>MAP</div>
+  <div class='item' data-show='report'>REPORT</div>
 </div>
 
 <div id='menu'>
@@ -71,19 +98,42 @@
 
 <script>
   
+  var indicators = {
+
+  };
+
+  HR.features.forEach(function(feature){
+    for (var k in feature.properties) {
+      if (feature.properties.hasOwnProperty(k)) {
+        indicators[k] = indicators[k] || {};
+        if (feature.properties[k] !== null) {
+          indicators[k].max = Math.max(indicators[k].max || 0, feature.properties[k]);
+          indicators[k].min = Math.min(indicators[k].min || 100, feature.properties[k]);
+        }
+      }
+    }
+  });
+
+
   var current_indicator = 'Flu shot';
 
-  $('#menu').click(function(e){
-    $(".submenu").css('bottom','-100px');
-    var which = $(e.target).attr('data-show');
-    $("#"+which).css('bottom','');
-  });
+  function gotoUserLocation() {
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+              map.setView([position.coords.longitude, position.coords.longitude], 4);
+          });
+      }
+  }
+  
+  resetStyles = function(){
+    for (k in hrLayer._layers) {
+      if (hrLayer._layers.hasOwnProperty(k)){
+        var feature = hrLayer._layers[k];
+        hrLayer.resetStyle(feature);
+      }
+    };
+  };
 
-  $('.submenu').click(function(e){
-    var which = $(e.target).attr('data-indicator');
-    current_indicator = which;
-    $("#current_indicator").text(current_indicator);
-  });
 
   L.mapbox.accessToken = 'pk.eyJ1IjoiZWNvdHJ1c3QiLCJhIjoibGo4TG5nOCJ9.QJnT2dgjL4_4EA7WlK8Zkw';
 
@@ -92,10 +142,6 @@
 
   var popup = new L.Popup({ autoPan: false });
 
-  var hrLayer = L.geoJson(HR,  {
-      style: getStyle,
-      onEachFeature: onEachFeature
-  }).addTo(map);
 
   function getStyle(feature) {
       return {
@@ -107,11 +153,12 @@
       };
   }
 
+  var legendColors = ["ffffcc", "#ffeda0", "#fed976", "#feb24c","#fd8d3c","#fc4e2a","#e31a1c", "#b10026"];
   // get color depending on population density value
   function getColor(d) {
-      var level = Math.floor(255 - d*255/100).toString(16);
-      var c = "#FF"+level+level;
-      return c;
+      if (d === null) return "#808080";
+      var bounds = indicators[current_indicator];
+      return legendColors[Math.floor(((d - bounds.min) / (bounds.max-bounds.min-.1)) * legendColors.length)];
   }
 
   function onEachFeature(feature, layer) {
@@ -155,27 +202,81 @@
 
   function zoomToFeature(e) {
       map.fitBounds(e.target.getBounds());
+      var props = e.target.feature.properties;
+      console.log(props)
+      var report = '<h1>' + props.region + '</h1>'
+      for (k in props){
+        if (props.hasOwnProperty(k)) {
+          report += k + ' : ' + (props[k] || '(no data)') + '<br>'
+        }
+      };
+      $("#report").html(report);
   }
 
-  map.legendControl.addLegend(getLegendHTML());
 
   function getLegendHTML() {
-    var grades = [0, 10, 20, 30, 40, 50, 60, 70],
-    labels = [],
-    from, to;
+    var from, to, labels = [];
+    var bounds = indicators[current_indicator];
 
-    for (var i = 0; i < grades.length; i++) {
-      from = grades[i];
-      to = grades[i + 1];
-
+    for (var i = 0; i < legendColors.length; i++) {
+      from = bounds.min + (bounds.max-bounds.min)*i/legendColors.length;
+      to = bounds.min + (bounds.max-bounds.min)*(i+1)/legendColors.length;
+      color = getColor(from);
+      console.log(color, to);
       labels.push(
-        '<li><span class="swatch" style="background:' + getColor(from + 1) + '"></span> ' +
-        from + (to ? '&ndash;' + to : '+')) + '</li>';
+        '<li><span class="swatch" style="background:' + getColor(to - .1) + '"></span> ' +
+        from.toFixed(1) + (to ? '&ndash;' + to.toFixed(1) : '+')) + '</li>';
     }
 
     return '<span>Percent </span><span id="current_indicator">Flu shot</span><ul>' + labels.join('') + '</ul>';
   }
 
+  var pickPrimaryView = function(which){
+    $(".primary").css('z-index',0);
+    $("#"+which).css('z-index',100);
+  };
+
+  var pickSubmenu = function(which){
+    $(".submenu").css('bottom','-100px');
+    $("#"+which).css('bottom','');
+  };
+
+  var pickIndicator = function(which, initial){
+    current_indicator = which;
+    $("#current_indicator").text(current_indicator);
+    if (!initial) resetStyles();
+    if (legendHTML) map.legendControl.removeLegend(legendHTML);
+    legendHTML = getLegendHTML();
+    map.legendControl.addLegend(legendHTML);
+  };
+
+  $('#toggle').click(function(e){
+    var which = $(e.target).attr('data-show');
+    pickPrimaryView(which);
+  });
+
+  $('#menu').click(function(e){
+    var which = $(e.target).attr('data-show');
+    pickSubmenu(which);
+  });
+
+  $('.submenu').click(function(e){
+    var which = $(e.target).attr('data-indicator');
+    pickIndicator(which);
+
+  });
+  
+  var legendHTML = '';
+
+  pickPrimaryView('map');
+  pickSubmenu('stranger-danger');
+  pickIndicator('Flu shot', true);
+
+  var hrLayer = L.geoJson(HR,  {
+      style: getStyle,
+      onEachFeature: onEachFeature
+  });
+  hrLayer.addTo(map);
 
 </script>
 </body>
