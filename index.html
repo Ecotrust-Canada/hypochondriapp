@@ -2,53 +2,179 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>Load GeoJSON</title>
+<title>HypochondriaApp</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<meta name='charset' content='utf-8' />
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+<script src='HR_smoothed_DATA.geojson'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
 <style>
   body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #map { position:fixed; top:0; bottom:20%; width:100%; }
+  #menu { position:fixed; bottom:0; left:0; right:0; height:10%; background-color:red; }
+  .submenu { position:fixed; bottom:10%; left:0; right:0; height:10%; background-color:blue; }
 </style>
+
+<style>
+.map-legend .swatch {
+  width:20px;
+  height:20px;
+  float:left;
+  margin-right:10px;
+  }
+.leaflet-popup-close-button {
+  display: none;
+  }
+.leaflet-popup-content-wrapper {
+  pointer-events: none;
+  }
+</style>
+
 </head>
 <body>
-<div id='map'></div>
-<script>
-L.mapbox.accessToken = 'pk.eyJ1IjoiZWNvdHJ1c3QiLCJhIjoibGo4TG5nOCJ9.QJnT2dgjL4_4EA7WlK8Zkw';
-var geojson = [
-  {
-    "type": "Feature",
-    "geometry": {
-      "type": "Point",
-      "coordinates": [-77.03238901390978,38.913188059745586]
-    },
-    "properties": {
-      "title": "Mapbox DC",
-      "description": "1714 14th St NW, Washington DC",
-      "marker-color": "#fc4353",
-      "marker-size": "large",
-      "marker-symbol": "monument"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-      "type": "Point",
-      "coordinates": [-122.414, 37.776]
-    },
-    "properties": {
-      "title": "Mapbox SF",
-      "description": "155 9th St, San Francisco",
-      "marker-color": "#fc4353",
-      "marker-size": "large",
-      "marker-symbol": "harbor"
-    }
-  }
-];
+<div id='map'>
+</div>
 
-L.mapbox.map('map', 'examples.3hqcl3di')
-  .setView([37.8, -96], 4)
-  .featureLayer.setGeoJSON(geojson);
+<div id='menu'>
+  <div class='submenu' id='sky-is-falling'>SIF</div>
+  <div class='submenu' id='stranger-danger'>SD</div>
+  <div class='submenu' id='own-worst-enemy'>OWE</div>
+  <div class='submenu' id='bad-luck'>BL</div>
+</div>
+
+<div class='submenu' id='sky-is-falling'>
+</div>
+<div class='submenu' id='stranger-danger'>
+  <div class='item' data-death='Second-hand home'>SHH</div>
+  <div class='item' data-death='Second-hand public'>SHP</div>
+  <div class='item' data-death='Second-hand vehicles'>SHV</div>
+  <div class='item' data-death='Flu shot'>FS/div>
+</div>
+<div class='submenu' id='own-worst-enemy'>
+  <div class='item' data-death='Bike helmet'>BH</div>
+  <div class='item' data-death='Injury year medical'>IYM</div>
+  <div class='item' data-death='High stress'>HS</div>
+  <div class='item' data-death='Inactive'>I</div>
+  <div class='item' data-death='Obese BMI'>OB</div>
+  <div class='item' data-death='Overweight BMI'>OB</div>
+  <div class='item' data-death='COPD'>COPD</div>
+  <div class='item' data-death='Daily smoker'>DS</div>
+  <div class='item' data-death='High BP'>HB</div>
+  <div class='item' data-death='Fair poor mental'>FPM</div>
+  <div class='item' data-death='Fair poor health'>FPH</div>
+</div>
+<div class='submenu' id='bad-luck'>
+  <div class='item' data-death='Asthma'>AS</div>
+  <div class='item' data-death='Diabetes'>DI</div>
+</div>
+
+<script>
+  L.mapbox.accessToken = 'pk.eyJ1IjoiZWNvdHJ1c3QiLCJhIjoibGo4TG5nOCJ9.QJnT2dgjL4_4EA7WlK8Zkw';
+
+  var map = L.mapbox.map('map', 'examples.3hqcl3di')
+    .setView([67.8, -96], 4);
+
+/*
+var featureLayer = L.mapbox.featureLayer()
+    .loadURL('HR_smoothed_DATA.geojson')
+    .addTo(map);
+*/
+
+  var popup = new L.Popup({ autoPan: false });
+
+  // statesData comes from the 'us-states.js' script included above
+  var statesLayer = L.geoJson(HR,  {
+      style: getStyle,
+      onEachFeature: onEachFeature
+  }).addTo(map);
+
+  function getStyle(feature) {
+      return {
+          weight: 2,
+          opacity: 0.1,
+          color: 'black',
+          fillOpacity: 0.7,
+          fillColor: getColor(feature.properties.Arthritis)
+      };
+  }
+
+  // get color depending on population density value
+  function getColor(d) {
+      return d > 70 ? '#8c2d04' :
+          d > 60  ? '#cc4c02' :
+          d > 50  ? '#ec7014' :
+          d > 40  ? '#fe9929' :
+          d > 30   ? '#fec44f' :
+          d > 20   ? '#fee391' :
+          d > 10   ? '#fff7bc' :
+          d == null ? '#888888' :
+          '#ffffe5';
+  }
+
+  function onEachFeature(feature, layer) {
+      layer.on({
+          mousemove: mousemove,
+          mouseout: mouseout,
+          click: zoomToFeature
+      });
+      document.getElementById("menu").innerHTML += feature.properties.region
+  }
+
+  var closeTooltip;
+
+  function mousemove(e) {
+      var layer = e.target;
+
+      popup.setLatLng(e.latlng);
+      popup.setContent('<div class="marker-title">' + layer.feature.properties.region + '</div>' +
+          layer.feature.properties.Arthritis + ' arthritis prevalence');
+
+      if (!popup._map) popup.openOn(map);
+      window.clearTimeout(closeTooltip);
+
+      // highlight feature
+      layer.setStyle({
+          weight: 3,
+          opacity: 0.3,
+          fillOpacity: 0.9
+      });
+
+      if (!L.Browser.ie && !L.Browser.opera) {
+          layer.bringToFront();
+      }
+  }
+
+  function mouseout(e) {
+      statesLayer.resetStyle(e.target);
+      closeTooltip = window.setTimeout(function() {
+          map.closePopup();
+      }, 100);
+  }
+
+  function zoomToFeature(e) {
+      map.fitBounds(e.target.getBounds());
+  }
+
+  map.legendControl.addLegend(getLegendHTML());
+
+  function getLegendHTML() {
+    var grades = [0, 10, 20, 30, 40, 50, 60, 70],
+    labels = [],
+    from, to;
+
+    for (var i = 0; i < grades.length; i++) {
+      from = grades[i];
+      to = grades[i + 1];
+
+      labels.push(
+        '<li><span class="swatch" style="background:' + getColor(from + 1) + '"></span> ' +
+        from + (to ? '&ndash;' + to : '+')) + '</li>';
+    }
+
+    return '<span>Percent </span><span id="property"></span><ul>' + labels.join('') + '</ul>';
+  }
+
+
 </script>
 </body>
 </html>
