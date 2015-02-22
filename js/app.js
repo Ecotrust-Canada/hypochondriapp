@@ -140,7 +140,7 @@ function zoomToFeature(e) {
       if (props.hasOwnProperty(k)) {
         $item = $report.find('[data-indicator="'+ k + '"]');
         if (props[k] && $item.length) {
-          $item.find('h3').text(props[k].toFixed(2) + '% in your area.');
+          $item.find('h3').text((typeof props[k] === 'number' ? props[k].toFixed() : props[k]) + '% in your area.');
           $item.css("border-left-color", getColor(props[k], k));
         } else {
           $item.hide();
