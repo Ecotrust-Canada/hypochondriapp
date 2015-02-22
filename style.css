@@ -1,0 +1,40 @@
+
+  body { margin:0; padding:0; font-family:verdana;}
+  h1,h2,h3,h4,h5,h6 {font-family: courier}
+  #toggle {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 200;
+  }
+  #map, #report { position:fixed; top:0; width:100%;}
+  #report { bottom: 10%; z-index: 0; background-color: white; padding: 20px 40px; font-size: 20px;}
+  #map { bottom: 20%; z-index: 100;}
+  #menu, .submenu {
+    background-color: transparent;
+    position: fixed;
+    right: 0;
+    left: 0;
+    height: 10%;
+    text-align: center;
+  }
+  #menu { bottom: 0}
+  .submenu { bottom:10%; }
+  .item {padding: 10px; display: inline-block; font-size: 28px; background-color: white;}
+
+  .map-legend li {
+    list-style: none;
+  }
+  .map-legend .swatch {
+    width:20px;
+    height:20px;
+    float:left;
+    margin-right:10px;
+  }
+  .leaflet-popup-close-button {
+    display: none;
+  }
+  .leaflet-popup-content-wrapper {
+    pointer-events: none;
+  }
+
