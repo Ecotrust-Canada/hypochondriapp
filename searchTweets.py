@@ -16,9 +16,14 @@ twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 
 
 keywords = [
+  'injury',
   'earthquake',
   'flu',
   'measles',
+  'cigarette',
+  'diabetes',
+  'vaccination',
+  'stressful'
 ]
 
 if os.path.exists('db.json'):
