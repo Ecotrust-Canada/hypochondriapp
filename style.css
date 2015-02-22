@@ -1,40 +1,70 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+  
+body { margin:0; padding:0; font-family:verdana;}
+h1,h2,h3,h4,h5,h6 {font-family: courier}
+h2 img {vertical-align:middle}
 
-  body { margin:0; padding:0; font-family:verdana;}
-  h1,h2,h3,h4,h5,h6 {font-family: courier}
-  #toggle {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 200;
-  }
-  #map, #report { position:fixed; top:0; width:100%;}
-  #report { bottom: 10%; z-index: 0; background-color: white; padding: 20px 40px; font-size: 20px;}
-  #map { bottom: 20%; z-index: 100;}
-  #menu, .submenu {
-    background-color: transparent;
-    position: fixed;
-    right: 0;
-    left: 0;
-    height: 10%;
-    text-align: center;
-  }
-  #menu { bottom: 0}
-  .submenu { bottom:10%; }
-  .item {padding: 10px; display: inline-block; font-size: 28px; background-color: white;}
+a {color:darkred; font-weight: bold; font-family: courier; font-size: 18px;}
+#toggleview {
+  padding: 30px;
+  position: fixed;
+  display: none;
+  bottom: 180px;
+  right: 0;
+  z-index: 102;
+  cursor: pointer;
+  background-color: white;
+}
+#toggleview .fear {
+  color: darkred;
+  font-size: 20px;
+  font-family: courier;
+}
+#map, #report { position:fixed; top:0; width:100%;}
+#report { overflow: auto; bottom: 0; z-index: 150; padding: 20px 40px; font-size: 20px; background-color: white;}
+#report .item {
+  margin: 30px 0;
+  padding: 0 30px;
+  border-left: 30px solid black;
+}
+#close_report {
+  top: 0;
+  right: 0;
+  font-size: 50px;
+  position: fixed;
+}
+#map { bottom: 0; z-index: 100;}
+#menu, .submenu {
+  position: fixed;
+  right: 0;
+  left: 0;
+  height: 80px;
+  text-align: center;
+  z-index: 101;
+}
+#menu { bottom: 0; background-color: rgba(255,255,255,0.8);}
+.submenu { bottom:-100px; background-color: rgba(255,255,255,0.6); }
+.submenu .item, #menu .item, #toggle .item {padding: 5px; display: inline-block; font-size: 28px; }
 
-  .map-legend li {
-    list-style: none;
-  }
-  .map-legend .swatch {
-    width:20px;
-    height:20px;
-    float:left;
-    margin-right:10px;
-  }
-  .leaflet-popup-close-button {
-    display: none;
-  }
-  .leaflet-popup-content-wrapper {
-    pointer-events: none;
-  }
+.map-legend li {
+  list-style: none;
+}
+.map-legend .swatch {
+  width:20px;
+  height:20px;
+  float:left;
+  margin-right:10px;
+}
+.leaflet-popup-close-button {
+  display: none;
+}
+.leaflet-popup-content-wrapper {
+  pointer-events: none;
+}
 

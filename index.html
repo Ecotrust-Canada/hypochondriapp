@@ -16,46 +16,193 @@
 </div>
 
 <div id='report' class='primary'>
-  <p>Pick a region first.</p>
 </div>
 
-<div id='toggle'>
-  <div class='item' data-show='map'>MAP</div>
-  <div class='item' data-show='report'>REPORT</div>
+<div id='toggleview'>
+  <div class='region'></div>
+  <div class='fear'>VIEW FEAR REPORT</div>
 </div>
 
 <div id='menu'>
-  <div class='item' data-show='sky-is-falling'>SIF</div>
-  <div class='item' data-show='stranger-danger'>SD</div>
-  <div class='item' data-show='own-worst-enemy'>OWE</div>
-  <div class='item' data-show='bad-luck'>BL</div>
+  <div class='item' data-show='stranger-danger'><img src="icons/istranger.svg"></div>
+  <div class='item' data-show='sky-is-falling'><img src="icons/isky.svg"></div>
+  <div class='item' data-show='own-worst-enemy'><img src="icons/ienemy.svg"></div>
+  <div class='item' data-show='bad-luck'><img src="icons/iluck.svg"></div>
 </div>
 
 <div class='submenu' id='sky-is-falling'>
 </div>
 <div class='submenu' id='stranger-danger'>
-  <div class='item' data-indicator='Second-hand home'>SHH</div>
-  <div class='item' data-indicator='Second-hand public'>SHP</div>
-  <div class='item' data-indicator='Second-hand vehicles'>SHV</div>
-  <div class='item' data-indicator='Flu shot'>FS</div>
+  <div class='item' data-indicator='Second-hand home'><img src="icons/ihouse.svg"></div>
+  <div class='item' data-indicator='Second-hand public'><img src="icons/ipublic.svg"></div>
+  <div class='item' data-indicator='Second-hand vehicles'><img src="icons/icar.svg"></div>
+  <div class='item' data-indicator='Flu shot'><img src="icons/ishot.svg"></div>
+  <div class='item' data-indicator='Measles/Mumps/Rubella Vaccination'><img src="icons/ishot.svg"></div>
+  <div class='item' data-indicator='Diptheria/Pertussis/Polio Vaccination'><img src="icons/ishot.svg"></div>
 </div>
 <div class='submenu' id='own-worst-enemy'>
-  <div class='item' data-indicator='Bike helmet'>BH</div>
-  <div class='item' data-indicator='Injury year medical'>IYM</div>
-  <div class='item' data-indicator='High stress'>HS</div>
-  <div class='item' data-indicator='Inactive'>I</div>
-  <div class='item' data-indicator='Obese BMI'>OB</div>
-  <div class='item' data-indicator='Overweight BMI'>OB</div>
-  <div class='item' data-indicator='COPD'>COPD</div>
-  <div class='item' data-indicator='Daily smoker'>DS</div>
-  <div class='item' data-indicator='High BP'>HB</div>
-  <div class='item' data-indicator='Fair poor mental'>FPM</div>
-  <div class='item' data-indicator='Fair poor health'>FPH</div>
+
+  <div class='item' data-indicator='Bike helmet'><img src="icons/ihelmet.svg"></div>
+  <div class='item' data-indicator='High stress'><img src="icons/istress.svg"></div>
+  <div class='item' data-indicator='Inactive'><img src="icons/iinactive.svg"></div>
+  <div class='item' data-indicator='Obese BMI'><img src="icons/iobese.svg"></div>
+  <div class='item' data-indicator='Overweight BMI'><img src="icons/ioverweight.svg"></div>
+  <div class='item' data-indicator='COPD'><img src="icons/icopd.svg"></div>
+  <div class='item' data-indicator='Daily smoker'><img src="icons/ismoke.svg"></div>
+  <div class='item' data-indicator='High BP'><img src="icons/ipressure.svg"></div>
 </div>
 <div class='submenu' id='bad-luck'>
-  <div class='item' data-indicator='Asthma'>AS</div>
-  <div class='item' data-indicator='Diabetes'>DI</div>
+  <div class='item' data-indicator='Injury year medical'><img src="icons/imedical.svg"></div>
+  <div class='item' data-indicator='Asthma'><img src="icons/iasthma.svg"></div>
+  <div class='item' data-indicator='Diabetes'><img src="icons/idiabetes.svg"></div>
 </div>
+
+
+<div id="report_template">
+  <div id="close_report">&times;</div>
+  <div>
+    <h2><img src="icons/istranger.svg"> Stranger Danger</h2>
+    <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla-mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupid-atat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.    </p>
+    <div class='item' data-indicator='Second-hand home'>
+      <h2><img src="icons/ihouse.svg"> Second-hand smoke at home</h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+    </div>
+    <div class='item' data-indicator='Second-hand public'>
+      <h2><img src="icons/ipublic.svg"> Second-hand smoke in public</h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='Second-hand vehicles'>
+      <h2><img src="icons/icar.svg"> Second-hand smoke in vehicles</h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='Flu shot'>
+      <h2><img src="icons/ishot.svg"> Percent who skipped their flu shot</h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='Measles/Mumps/Rubella Vaccination'>
+      <h2><img src="icons/ishot.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='Diptheria/Pertussis/Polio Vaccination'>
+      <h2><img src="icons/ishot.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+  </div> 
+
+  <div class='submenu' id='own-worst-enemy'>
+  <div>
+    <h2><img src="icons/ienemy.svg"> Own Worst Enemy</h2>
+    <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla-mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupid-atat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.    </p>
+    <div class='item' data-indicator='Bike helmet'>
+      <h2><img src="icons/ihelmet.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='High stress'>
+      <h2><img src="icons/istress.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='Inactive'>
+      <h2><img src="icons/iinactive.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='Obese BMI'>
+      <h2><img src="icons/iobese.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='Overweight BMI'>
+      <h2><img src="icons/ioverweight.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='COPD'>
+      <h2><img src="icons/icopd.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='Daily smoker'>
+      <h2><img src="icons/ismoke.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='High BP'>
+      <h2><img src="icons/ipressure.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+  </div>
+  <div>
+    <h2><img src="icons/iluck.svg">Bad Luck</h2>
+    <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla-mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupid-atat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.    </p>
+    <div class='item' data-indicator='Injury year medical'>
+      <h2><img src="icons/imedical.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='Asthma'>
+      <h2><img src="icons/iasthma.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+    <div class='item' data-indicator='Diabetes'>
+      <h2><img src="icons/idiabetes.svg"></h2>
+      <h3></h3>
+      <p>Lorem ipsum...</p>
+      <a href="#">Learn how to protect yourself &#10095;</a>
+      
+    </div>
+  </div>
+  <div>
+    <h2><img src="icons/isky.svg">The Sky Is Falling</h2>
+    <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla-mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupid-atat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.    </p>
+  </div>
+
+</div>
+
 
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
 <script src='HR_smoothed_DATA.geojson'></script>
