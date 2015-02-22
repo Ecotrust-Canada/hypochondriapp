@@ -150,7 +150,7 @@ function zoomToFeature(e) {
     //console.log(e.latlng);
     $.getJSON("http://api-beta.breezometer.com/baqi/?lat="+e.latlng.lat+"&lon="+e.latlng.lng+"&key=d4bb7a4a7d8b4f0fb1ede90a5fbb4923", function(result){
         console.log(result);
-        var message = "<b style='font-family:courier;color:lightblue'>Air Quality at " + e.latlng.lat.toFixed(3) + "&deg;," + e.latlng.lng.toFixed(3) + "&deg</b> : ";
+        var message = "<b style='font-family:courier;color:darkred'>Air Quality at " + e.latlng.lat.toFixed(3) + "&deg;," + e.latlng.lng.toFixed(3) + "&deg</b> : ";
         if (result.data_valid == false) {
           message += "Sorry, no air quality data in most rural areas.";
         } else {
