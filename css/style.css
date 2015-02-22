@@ -27,7 +27,12 @@ a {color:darkred; font-weight: bold; font-family: courier; font-size: 18px;}
   font-size: 20px;
   font-family: courier;
 }
-
+.aq-result {
+  padding: 10px 25px;
+  border: 2px solid black;
+  font-weight: normal;
+  font-family: courier;
+}
 /* primary screens */
 #map, #report { position:fixed; top:0; width:100%;}
 #report { overflow: auto; bottom: 0; z-index: 150; padding: 20px 40px; font-size: 20px; background-color: white;}

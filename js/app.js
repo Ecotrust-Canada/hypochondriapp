@@ -154,7 +154,7 @@ function zoomToFeature(e) {
         if (result.data_valid == false) {
           message += "Sorry, no air quality data in most rural areas.";
         } else {
-          message += result.breezometer_description + ". <small>" + (result.random_recommendations.health || '') + ". " + (result.random_recommendations.casues || '');
+          message += "<b class='aq-result' style='background-color:"+result.country_color+"'>" + result.breezometer_description + ".</b> <small>" + (result.random_recommendations.health || '') + ". " + (result.random_recommendations.casues || '');
         }
         $("#airquality").html(message + "  <i>(data provided by Breezometer &copy;)<i></small>");
     });
