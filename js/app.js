@@ -148,7 +148,7 @@ function zoomToFeature(e) {
       }
     };
     $("#report").empty(); //.append($report);
-
+/*
     var xy = d3.geo.mercator().translate([200,100])
     console.log(HR.features[0].geometry.coordinates[0][0][0]);
     //.center(HR.features[0].geometry.coordinates[0][0][0][0],HR.features[0].geometry.coordinates[0][0][0][1]);//.scale(3);
@@ -159,7 +159,7 @@ function zoomToFeature(e) {
             return "black";
         }).attr("stroke", "#222");
     console.log();
-            
+            */
     $("#report").append($report);
     
     $("#toggleview").show();
