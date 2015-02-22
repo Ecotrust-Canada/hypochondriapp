@@ -124,7 +124,7 @@ function mousemove(e) {
 }
 
 function mouseout(e) {
-    hrLayer.resetStyle(e.target);
+    if (selectedLayer && e.target.feature.properties.region !== selectedLayer.feature.properties.region) hrLayer.resetStyle(e.target);
     closeTooltip = window.setTimeout(function() {
         map.closePopup();
     }, 100);
@@ -132,7 +132,7 @@ function mouseout(e) {
 
 var selectedLayer;
 function zoomToFeature(e) {
-  selectedLayer = e.target;
+    selectedLayer = e.target;
     map.fitBounds(e.target.getBounds());
     var props = e.target.feature.properties;
     var $report = $('<h1>' + props.region + '</h1>' + $("#report_template").html());
@@ -233,7 +233,6 @@ $('body').on( "click", "#close_report", function(){
 });
 
 $(".submenu .item").each(function(){
-  console.log(this);
   $(this).find('img').attr("title", $(this).attr("data-indicator"));
 });
 

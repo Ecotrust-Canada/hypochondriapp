@@ -62,7 +62,7 @@ a {color:darkred; font-weight: bold; font-family: courier; font-size: 18px;}
   z-index: 101;
 }
 #menu p, .submenu p {position:absolute; top: 0; left: 50%; margin: 0 0 0 -80px; font-size: 12;}
-#menu img, .submenu img {height: 60px;}
+#menu img, .submenu img {height: 60px; cursor: pointer;}
 #menu { bottom: 0; background-color: rgba(255,255,255,0.8);}
 
 .submenu { bottom:-100px; background-color: rgba(255,255,255,0.6); }
@@ -81,6 +81,8 @@ a {color:darkred; font-weight: bold; font-family: courier; font-size: 18px;}
   height:20px;
   float:left;
   margin-right:10px;
+  border: 2px solid black;
+  border-bottom: none;
 }
 .leaflet-popup-close-button {
   display: none;
