@@ -7,13 +7,16 @@ var indicators = {
 var isIndicatorInverted = function(indicator) {
     indicator = indicator || current_indicator;
     return indicator == 'Bike helmet' ||
-      indicator == 'Flu shot';
+      indicator == 'Flu shot' ||
+      indicator == 'Measles/Mumps/Rubella Vaccination' || 
+      indicator == 'Diptheria/Pertussis/Polio Vaccination';
 };
 
 HR.features.forEach(function(feature){
   for (var k in feature.properties) {
     if (feature.properties.hasOwnProperty(k)) {
       if (isIndicatorInverted(k) && feature.properties[k]) feature.properties[k] = 100 - feature.properties[k];
+      if (k === "Earthquake count") feature.properties[k] = feature.properties[k] / ((feature.properties.area + 300000) / 66000);
       indicators[k] = indicators[k] || {};
       if (feature.properties[k] !== null) {
         indicators[k].max = Math.max(indicators[k].max || 0, feature.properties[k]);
@@ -95,7 +98,7 @@ var indicatorDisplayName = function(layer){
 
 var indicatorDisplayData = function(layer){
     var val = layer.feature.properties[current_indicator] || '(no data)';
-    return val
+    return typeof val === 'number' ? val.toFixed(1) : val;
 };
 
 function mousemove(e) {
@@ -138,7 +141,6 @@ function zoomToFeature(e) {
         $item = $report.find('[data-indicator="'+ k + '"]');
         if (props[k] && $item.length) {
           $item.find('h3').text(props[k] + '% in your area.');
-          console.log(getColor(props[k], k), k);
           $item.css("border-left-color", getColor(props[k], k));
         } else {
           $item.hide();
@@ -231,6 +233,9 @@ $('body').on( "click", "#close_report", function(){
 
 $(".submenu").each(function(){
   $(this).find("img").attr("title", $(this).find("img").attr("data-indicator"));
+});
+$('.md-close').bind( 'click', function( ev ) {
+  $("#modal-10").remove();
 });
 
 var legendHTML = '';
