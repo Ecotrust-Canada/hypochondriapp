@@ -62,12 +62,14 @@ a {color:darkred; font-weight: bold; font-family: courier; font-size: 18px;}
   z-index: 101;
 }
 #menu p, .submenu p {position:absolute; top: 0; left: 50%; margin: 0 0 0 -80px; font-size: 12;}
-#menu img, .submenu img {height: 60px; cursor: pointer;}
+#menu img, .submenu img {height: 55px; cursor: pointer;}
 #menu { bottom: 0; background-color: rgba(255,255,255,0.8);}
 
-.submenu { bottom:-100px; background-color: rgba(255,255,255,0.6); }
-.submenu .item, #menu .item, #toggle .item {padding: 5px; display: inline-block; font-size: 28px; }
-
+.submenu { bottom:-100px; background-color: rgba(255,255,255,0.6);}
+.submenu .item, #menu .item, #toggle .item {padding: 5px 0 0 0; display: inline-block; font-size: 28px; }
+.submenu .inner {
+    min-width: 500px;
+}
 .map-legend {
   background: url("../icons/logo.png") top center no-repeat;
   padding-top: 100px !important;
@@ -91,3 +93,43 @@ a {color:darkred; font-weight: bold; font-family: courier; font-size: 18px;}
   pointer-events: none;
 }
 
+
+#toggleview {
+    -webkit-animation: pulsate 2s linear;
+    -webkit-animation-iteration-count: infinite;
+    animation: pulsate 2s linear;
+    animation-iteration-count: infinite;
+}
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(1, 1);}
+    35% {-webkit-transform: scale(1.15, 1.15);}
+    70% {-webkit-transform: scale(1.03, 1.03);}
+    100% {-webkit-transform: scale(1, 1);}
+}
+@keyframes pulsate {
+    0% {transform: scale(1, 1);}
+    35% {transform: scale(1.15, 1.15);}
+    70% {transform: scale(1.03, 1.03);}
+    100% {transform: scale(1, 1);}
+}
+.md-close {
+    -webkit-animation: pulsate 2s linear;
+    -webkit-animation-iteration-count: infinite;
+    animation: pulsate 2s linear;
+    animation-iteration-count: infinite;
+}
+
+
+/* Smartphones (portrait and landscape) ----------- */
+/* Smartphones (portrait) ----------- */
+
+@media only screen and (max-width: 980px){
+/* Styles */
+  .map-legend{
+    display:none;
+  }
+  #report {
+    padding: 5px;
+  }
+  .submenu {overflow: auto;}
+}

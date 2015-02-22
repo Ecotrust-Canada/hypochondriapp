@@ -147,7 +147,21 @@ function zoomToFeature(e) {
         }
       }
     };
-    $("#report").empty().append($report);
+    $("#report").empty(); //.append($report);
+
+    var xy = d3.geo.mercator().translate([200,100])
+    console.log(HR.features[0].geometry.coordinates[0][0][0]);
+    //.center(HR.features[0].geometry.coordinates[0][0][0][0],HR.features[0].geometry.coordinates[0][0][0][1]);//.scale(3);
+    var path = d3.geo.path().projection(xy);
+    xy.center(xy.invert(path.centroid(selectedLayer.feature))).scale(1000);
+    var vis = d3.select("#report").append("svg:svg").attr("width", 400).attr("height", 200);
+        vis.append("svg:g").attr("class", "tracts").selectAll("path").data([selectedLayer.feature]).enter().append("svg:path").attr("d", path).attr("fill-opacity", 0.5).attr("fill", function (d) {
+            return "black";
+        }).attr("stroke", "#222");
+    console.log();
+            
+    $("#report").append($report);
+    
     $("#toggleview").show();
     $("#toggleview .region").text("Now living in " + props.region);
 }
