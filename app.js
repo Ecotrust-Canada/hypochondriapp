@@ -5,7 +5,9 @@ var indicators = {
 
 
 var isIndicatorInverted = function(indicator) {
-    return (indicator || current_indicator) == 'Bike helmet' || (indicator || current_indicator) == 'Flu shot';
+    indicator = indicator || current_indicator;
+    return indicator == 'Bike helmet' ||
+      indicator == 'Flu shot';
 };
 
 HR.features.forEach(function(feature){
@@ -48,7 +50,7 @@ var map = L.mapbox.map('map', 'ecotrust.405061ba',
     position:'topright'
   }
 })
-  .setView([67.8, -96], 4);
+  .setView([57.8, -96], 4);
 
 var popup = new L.Popup({ autoPan: false });
 
@@ -101,7 +103,7 @@ function mousemove(e) {
 
     popup.setLatLng(e.latlng);
     popup.setContent('<div class="marker-title">' + layer.feature.properties.region + '</div>' +
-        indicatorDisplayData(layer) + ' ' + current_indicator + ' prevalence');
+        indicatorDisplayData(layer) + ' % ' + indicatorDisplayName(current_indicator));
 
     if (!popup._map) popup.openOn(map);
     window.clearTimeout(closeTooltip);
@@ -161,7 +163,7 @@ function getLegendHTML() {
       from.toFixed(1) + (to ? '&ndash;' + to.toFixed(1) : '+')) + '</li>';
   }
 
-  return '<span>Percent </span><span id="current_indicator">' + indicatorDisplayName() + '</span><ul>' + labels.join('') + '</ul>';
+  return '<span>% </span><span id="current_indicator">' + indicatorDisplayName() + '</span><ul>' + labels.join('') + '</ul>';
 }
 
 var pickPrimaryView = function(which){
@@ -225,6 +227,10 @@ $('#toggleview').click(function(){
 $('body').on( "click", "#close_report", function(){
   $('#report').css('display','none');
   $('#map').css('display','block');
+});
+
+$(".submenu").each(function(){
+  $(this).find("img").attr("title", $(this).find("img").attr("data-indicator"));
 });
 
 var legendHTML = '';
