@@ -163,7 +163,7 @@ function zoomToFeature(e) {
     $("#report").append($report);
     
     $("#toggleview").show();
-    $("#toggleview .region").text("Now living in " + props.region);
+    $("#toggleview .region").html("Now living in " + props.region);
 }
 
 
