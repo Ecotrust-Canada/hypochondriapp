@@ -59,6 +59,10 @@ a {color:darkred; font-weight: bold; font-family: courier; font-size: 18px;}
 .submenu { bottom:-100px; background-color: rgba(255,255,255,0.6); }
 .submenu .item, #menu .item, #toggle .item {padding: 5px; display: inline-block; font-size: 28px; }
 
+.map-legend {
+  background: url("icons/logo.png") 20px 5px no-repeat;
+  padding-top: 100px !important;
+}
 .map-legend li {
   list-style: none;
 }
