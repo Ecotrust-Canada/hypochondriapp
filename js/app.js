@@ -254,6 +254,7 @@ $('.md-close').bind( 'click', function( ev ) {
   $("#modal-10").remove();
 });
 
+
 var legendHTML = '';
 
 pickPrimaryView('map');
@@ -265,3 +266,21 @@ var hrLayer = L.geoJson(HR,  {
     onEachFeature: attachLayerEvents
 });
 hrLayer.addTo(map);
+
+
+// plotting the tweets.
+var markers = new L.MarkerClusterGroup();
+
+for (var i = 0; i < tw.earthquake.length; i++) {
+    var a = tw.earthquake[i];
+    var when = (new Date(a.when));
+    var title = "TWEETED FROM HERE -- <b style='font-family:courier'>" + a.user + ' (' + when.getMonth() + '/' + when.getDate() + ')</b> <small>' + a.text + '</small>';
+    var marker = L.marker(new L.LatLng(a.geo.coordinates[0], a.geo.coordinates[1]), {
+        icon: L.mapbox.marker.icon({'marker-symbol': 'danger', 'marker-color': '#880000'}),
+        title: title
+    });
+    marker.bindPopup(title);
+    markers.addLayer(marker);
+}
+
+map.addLayer(markers);
