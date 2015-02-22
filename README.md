@@ -1,4 +1,4 @@
-# Hypochondriapp
+# HypochondriApp
 Ecotrust Canada's Entry in the CODE Hackathon.
 
 ## Dev setup
