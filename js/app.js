@@ -1,4 +1,12 @@
 
+// tell users about IE.
+/*
+var ua = window.navigator.userAgent;
+if (ua.indexOf("MSIE") > -1) {
+  $(".md-content").html("<p>For best results, please </p><a href='http://www.google.com/chrome/'><button>Download Google Chrome</button></a>");
+}
+*/
+
 var indicators = {
 
 };
