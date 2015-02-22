@@ -180,7 +180,6 @@ var pickSubmenu = function(which){
   $(".submenu").css('bottom','-100px');
   $("#"+which).css('bottom','80px');
   $img = $('[data-show="'+which+'"] img');
-  $.fn.swapActiveImg = sai;
   $img.swapActiveImg(true);
 };
 
@@ -188,11 +187,10 @@ var current_indicator;
 var toggleIndicatorIcon = function(state){
   if (!current_indicator) return;
   var $img = $('[data-indicator="'+current_indicator+'"]').find("img");
-  console.log($img, state);
-  $.fn.swapActiveImg = sai;
   $img.swapActiveImg(state);
 };
-var sai = $.fn.swapActiveImg = function(state) {
+
+$.fn.swapActiveImg = function(state) {
   $(this).each(function(){
     $img = $(this);
     if (state) {
@@ -234,9 +232,11 @@ $('body').on( "click", "#close_report", function(){
   $('#map').css('display','block');
 });
 
-$(".submenu").each(function(){
-  $(this).find("img").attr("title", $(this).find("img").attr("data-indicator"));
+$(".submenu .item").each(function(){
+  console.log(this);
+  $(this).find('img').attr("title", $(this).attr("data-indicator"));
 });
+
 $('.md-close').bind( 'click', function( ev ) {
   $("#modal-10").remove();
 });

@@ -6,7 +6,7 @@ html {
   box-sizing: inherit;
 }
   
-body { margin:0; padding:0; font-family:verdana;}
+body { margin:0; padding:0; font-family:verdana; overflow:hidden;}
 h1,h2,h3,h4,h5,h6 {font-family: courier}
 h2 img {vertical-align:middle}
 
@@ -55,13 +55,15 @@ a {color:darkred; font-weight: bold; font-family: courier; font-size: 18px;}
   text-align: center;
   z-index: 101;
 }
+#menu p {position:absolute; top: 0; left: 50%; margin: 0 0 0 -80px;}
 #menu { bottom: 0; background-color: rgba(255,255,255,0.8);}
 .submenu { bottom:-100px; background-color: rgba(255,255,255,0.6); }
 .submenu .item, #menu .item, #toggle .item {padding: 5px; display: inline-block; font-size: 28px; }
 
 .map-legend {
-  background: url("icons/logo.png") 20px 5px no-repeat;
-  padding-top: 100px !important;
+  background: url("../icons/logo.png") 20px 5px no-repeat;
+  padding-top: 110px !important;
+  font-family: courier;
 }
 .map-legend li {
   list-style: none;

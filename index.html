@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="css/default.css" />
 <link rel="stylesheet" type="text/css" href="css/component.css" />
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
-<link href='style.css' rel='stylesheet' />
+<link href='css/style.css' rel='stylesheet' />
 
 </head>
 <body>
@@ -29,6 +29,7 @@
   <div class='item' data-show='sky-is-falling'><img title="Sky is Falling" src="icons/isky.svg"></div>
   <div class='item' data-show='own-worst-enemy'><img title="Own Worst Enemy" src="icons/ienemy.svg"></div>
   <div class='item' data-show='bad-luck'><img title="Bad Luck" src="icons/iluck.svg"></div>
+  <p>pick a category</p>
 </div>
 
 <div class='submenu' id='sky-is-falling'>
@@ -111,7 +112,6 @@
     </div>
   </div> 
 
-  <div class='submenu' id='own-worst-enemy'>
   <div>
     <h2><img src="icons/ienemy.svg"> Own Worst Enemy</h2>
     <p>
@@ -209,32 +209,31 @@
       <h3></h3>
       <p>That was just a passing truck, right? This is the frequency that each health region has experienced earthquakes in the last 5 years, by percentile across Canada. Regions with higher percentiles have experienced more rocking and rolling than those with lower percentiles. And if The Big One hits? Don’t run – duck and cover and hold on!</p>
       <a href="#">Learn how to protect yourself &#10095;</a>
-      
     </div>
+  </div>
+</div><!-- end report_template -->
 
+<div class="md-modal md-show md-effect-10" id="modal-10">
+  <div class="md-content">
+    <h3>Welcome To HypochondriApp!</h3>
+    <div>
+      <p>Discover factors which may contribute to your demise as follows:</p>
+      <ul>
+        <li><strong>Select</strong> your region in Canada.</li>
+        <li><strong>View</strong> any number of indicators (at the bottom).</li>
+        <li><strong>Discover</strong> the maladies in your area - be they large, small or imageined.</li>
+      </ul>
+      <button class="md-close">I'm Ready!</button>
+    </div>
+  </div>
 </div>
-
-    <div class="md-modal md-show md-effect-10" id="modal-10">
-      <div class="md-content">
-        <h3>Welcome To HypochondriApp!</h3>
-        <div>
-          <p>Discover factors which may contribute to your demise as follows:</p>
-          <ul>
-            <li><strong>Select</strong> your region in Canada.</li>
-            <li><strong>View</strong> any number of indicators (at the bottom).</li>
-            <li><strong>Discover</strong> the maladies in your area - be they large, small or imageined.</li>
-          </ul>
-          <button class="md-close">I'm Ready!</button>
-        </div>
-      </div>
-    </div>
 
 <!-- classie.js by @desandro: https://github.com/desandro/classie -->
 
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
 <script src='HR_smoothed_DATA.geojson'></script>
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="app.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>
