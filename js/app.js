@@ -82,7 +82,7 @@ function getColor(d, indicator) {
 
 var attachLayerEvents = function(feature, layer) {
     layer.on({
-        mousemove: mousemove,
+        mouseover: mousemove,
         mouseout: mouseout,
         click: zoomToFeature
     });
@@ -124,7 +124,7 @@ function mousemove(e) {
 }
 
 function mouseout(e) {
-    if (selectedLayer && e.target.feature.properties.region !== selectedLayer.feature.properties.region) hrLayer.resetStyle(e.target);
+    if (!selectedLayer || e.target.feature.properties.region !== selectedLayer.feature.properties.region) hrLayer.resetStyle(e.target);
     closeTooltip = window.setTimeout(function() {
         map.closePopup();
     }, 100);
@@ -140,7 +140,7 @@ function zoomToFeature(e) {
       if (props.hasOwnProperty(k)) {
         $item = $report.find('[data-indicator="'+ k + '"]');
         if (props[k] && $item.length) {
-          $item.find('h3').text(props[k] + '% in your area.');
+          $item.find('h3').text(props[k].toFixed(2) + '% in your area.');
           $item.css("border-left-color", getColor(props[k], k));
         } else {
           $item.hide();
