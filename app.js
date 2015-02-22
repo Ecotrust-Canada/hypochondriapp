@@ -180,6 +180,7 @@ var pickSubmenu = function(which){
   $(".submenu").css('bottom','-100px');
   $("#"+which).css('bottom','80px');
   $img = $('[data-show="'+which+'"] img');
+  $.fn.swapActiveImg = sai;
   $img.swapActiveImg(true);
 };
 
@@ -187,9 +188,11 @@ var current_indicator;
 var toggleIndicatorIcon = function(state){
   if (!current_indicator) return;
   var $img = $('[data-indicator="'+current_indicator+'"]').find("img");
+  console.log($img, state);
+  $.fn.swapActiveImg = sai;
   $img.swapActiveImg(state);
 };
-$.fn.swapActiveImg = function(state) {
+var sai = $.fn.swapActiveImg = function(state) {
   $(this).each(function(){
     $img = $(this);
     if (state) {
