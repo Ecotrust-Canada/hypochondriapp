@@ -16,6 +16,8 @@ twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 
 
 keywords = [
+  'COPD',
+  'asthma',
   'injury',
   'earthquake',
   'flu',

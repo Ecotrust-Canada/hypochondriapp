@@ -290,9 +290,14 @@ function setTweetLayer(k){
     'Flu shot':'flu',
     'Measles/Mumps/Rubella Vaccination':'measles',
     'Daily smoker':'cigarette',
+    '':'cigarette',
+    '':'cigarette',
+    '':'cigarette',
     'Diabetes':'diabetes',
     'Diptheria/Pertussis/Polio Vaccination':'vaccination',
-    'High stress':'stressful'
+    'High stress':'stressful',
+    'COPD':'COPD',
+    'Asthma':'asthma'
   }
   if (indicatorTweets[k]) k = indicatorTweets[k];
   
